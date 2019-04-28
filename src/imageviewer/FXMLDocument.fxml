@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="513.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="imageviewer.FXMLDocumentController">
+    <children>
+        <Label fx:id="name" layoutX="187.0" layoutY="33.0" minHeight="16" minWidth="69" prefHeight="30.0" prefWidth="142.0" />
+      <ImageView fx:id="imageview" fitHeight="420.0" fitWidth="367.0" layoutX="74.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="play" layoutX="200.0" layoutY="530.0" onAction="#playaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" iconName="PLAY" size="2em" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="pre" layoutX="111.0" layoutY="530.0" onAction="#previousPic" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" iconName="BACKWARD" size="2em" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="stop" layoutX="283.0" layoutY="530.0" onAction="#stopaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" iconName="PAUSE" size="2em" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="next" layoutX="361.0" layoutY="530.0" onAction="#nextpic" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" iconName="FORWARD" size="2em" />
+         </graphic>
+      </JFXButton>
+    </children>
+</AnchorPane>
