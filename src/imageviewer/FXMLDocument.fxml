@@ -6,28 +6,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="513.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="imageviewer.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="513.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.FXMLDocumentController">
     <children>
-        <Label fx:id="name" layoutX="186.0" layoutY="33.0" minHeight="16" minWidth="69" prefHeight="30.0" prefWidth="142.0" textFill="WHITE" />
-      <ImageView fx:id="imageview" fitHeight="420.0" fitWidth="381.0" layoutX="68.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton fx:id="play" layoutX="200.0" layoutY="530.0" onAction="#playaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+        <Label fx:id="name" layoutX="186.0" layoutY="14.0" minHeight="16" minWidth="69" prefHeight="30.0" prefWidth="142.0" textFill="WHITE" />
+      <ImageView fx:id="imageview" fitHeight="405.0" fitWidth="381.0" layoutX="69.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="playbtn" layoutX="200.0" layoutY="550.0" onAction="#playaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
          <graphic>
             <FontAwesomeIcon fill="WHITE" iconName="PLAY" size="2em" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="pre" layoutX="111.0" layoutY="530.0" onAction="#previousPic" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+      <JFXButton fx:id="previousbtn" layoutX="111.0" layoutY="550.0" onAction="#previousPic" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
          <graphic>
             <FontAwesomeIcon fill="WHITE" iconName="BACKWARD" size="2em" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="stop" layoutX="283.0" layoutY="530.0" onAction="#stopaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+      <JFXButton fx:id="stopbtn" layoutX="283.0" layoutY="550.0" onAction="#stopaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
          <graphic>
             <FontAwesomeIcon fill="WHITE" iconName="PAUSE" size="2em" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="next" layoutX="361.0" layoutY="530.0" onAction="#nextpic" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
+      <JFXButton fx:id="nextbtn" layoutX="361.0" layoutY="550.0" onAction="#nextpic" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
          <graphic>
             <FontAwesomeIcon fill="WHITE" iconName="FORWARD" size="2em" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="selectfile" layoutX="205.0" layoutY="490.0" onAction="#handleselectfile" stylesheets="@ImageviewerCSS.css" text="Select File" textFill="WHITE">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" iconName="IMAGE" size="1.5em" />
          </graphic>
       </JFXButton>
     </children>

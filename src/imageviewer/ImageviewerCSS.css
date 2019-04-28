@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : wailampoon
 */
 
-#play{
+#playbtn{
      -fx-background-radius: 10 ;
      -fx-border-color: white;
      -fx-border-radius: 10;
@@ -16,7 +16,7 @@ and open the template in the editor.
 }
 
 
-#stop{
+#stopbtn{
      -fx-background-radius: 10;
      -fx-border-color: white;
      -fx-border-radius: 10;
@@ -24,23 +24,24 @@ and open the template in the editor.
 }
 
 
-#next{
+#nextbtn{
      -fx-background-radius: 10 ;
      -fx-border-color: white;
      -fx-border-radius: 10;
     
 }
 
-#pre{
+#previousbtn{
     
         -fx-background-radius: 10 ;
      -fx-border-color: white;
      -fx-border-radius: 10;
 }
 
-#imageview{
+#selectfile{
     
-    
+    -fx-border-color: white;
+     -fx-border-radius: 10;
     
    
 }
