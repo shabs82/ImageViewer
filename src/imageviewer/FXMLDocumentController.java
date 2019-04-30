@@ -11,6 +11,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,44 +47,58 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private JFXButton nextbtn;
 
+    private ScheduledExecutorService executor;
+
     private final List<Image> images = new ArrayList<>();
     private int currentImageIndex = 0;
     private List<File> files = new ArrayList<>();
     @FXML
     private JFXButton selectfile;
 
+    private boolean running;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        playbtn.setOnAction((ActionEvent event)
-                -> {
-            playaction(event);
-        });
-
-        previousbtn.setOnAction((ActionEvent event)
-                -> {
-            previousPic(event);
-        });
-
-        nextbtn.setOnAction((ActionEvent event)
-                -> {
-            nextpic(event);
-        });
     }
 
     @FXML
     private void playaction(ActionEvent event) {
+        start();
 
-        
-       for(int i =0; i <images.size();i++){
-        if (!images.isEmpty()) {
-            currentImageIndex
-                    = (currentImageIndex - 1 + images.size()) % images.size();
-          
+    }
+
+    private void start() {
+
+        if (!running) {
+            Runnable thread = () -> {
+                nextbtn.fire();
+            };
+
+            executor = Executors.newScheduledThreadPool(2);
+            executor.scheduleAtFixedRate(thread, 2, 2, TimeUnit.SECONDS);
+
+            running = true;
         }
-         displayImage();
-       }
-        //  imageview.setImage(images.get(currentImageIndex));
+    }
+
+    @FXML
+    private void stopaction(ActionEvent event) {
+        executor.shutdown();
+        running = false;
+    }
+
+    @FXML
+    private void nextpic(ActionEvent event) {
+
+        if (!images.isEmpty()) {
+            currentImageIndex = (currentImageIndex + 1) % images.size();
+            displayImage();
+            Platform.runLater(() -> {
+                setName(images.get(currentImageIndex).impl_getUrl());
+            });
+
+        }
     }
 
     @FXML
@@ -89,20 +108,10 @@ public class FXMLDocumentController implements Initializable {
             currentImageIndex
                     = (currentImageIndex - 1 + images.size()) % images.size();
             displayImage();
-           
-        }
-    }
+            Platform.runLater(() -> {
+                setName(images.get(currentImageIndex).impl_getUrl());
+            });
 
-    @FXML
-    private void stopaction(ActionEvent event) {
-    }
-
-    @FXML
-    private void nextpic(ActionEvent event) {
-
-        if (!images.isEmpty()) {
-            currentImageIndex = (currentImageIndex + 1) % images.size();
-            displayImage();
         }
     }
 
@@ -110,12 +119,17 @@ public class FXMLDocumentController implements Initializable {
         if (!images.isEmpty()) {
             imageview.setImage(images.get(currentImageIndex));
         }
+
     }
 
     @FXML
     private void handleselectfile(ActionEvent event) {
 
-        loadFile();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select image files");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Images",
+                "*.png", "*.jpg", "*.gif", "*.tif", "*.bmp", "*.jpeg"));
+        files = fileChooser.showOpenMultipleDialog(new Stage());
 
         if (!files.isEmpty()) {
             files.forEach((File f)
@@ -123,15 +137,12 @@ public class FXMLDocumentController implements Initializable {
                 images.add(new Image(f.toURI().toString()));
             });
             displayImage();
+            setName(images.get(currentImageIndex).impl_getUrl());
         }
     }
 
-    public void loadFile() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select image files");
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("Images",
-                "*.png", "*.jpg", "*.gif", "*.tif", "*.bmp", "*.jpeg"));
-        files = fileChooser.showOpenMultipleDialog(new Stage());
+    public void setName(String imagepic) {
+        name.setText(imagepic.substring(imagepic.lastIndexOf("/") + 1, imagepic.length()));
 
     }
 

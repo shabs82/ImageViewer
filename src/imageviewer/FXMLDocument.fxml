@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="513.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.FXMLDocumentController">
     <children>
-        <Label fx:id="name" layoutX="186.0" layoutY="14.0" minHeight="16" minWidth="69" prefHeight="30.0" prefWidth="142.0" textFill="WHITE" />
+        <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="21.0" minHeight="16" minWidth="69" prefHeight="30.0" prefWidth="325.0" textAlignment="CENTER" textFill="WHITE" />
       <ImageView fx:id="imageview" fitHeight="405.0" fitWidth="381.0" layoutX="69.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton fx:id="playbtn" layoutX="200.0" layoutY="550.0" onAction="#playaction" prefHeight="30.0" prefWidth="30.0" stylesheets="@ImageviewerCSS.css">
          <graphic>
