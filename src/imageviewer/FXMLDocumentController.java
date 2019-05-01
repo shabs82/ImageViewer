@@ -55,7 +55,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private JFXButton selectfile;
 
-    private boolean running;
+//    private boolean running;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,52 +65,44 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void playaction(ActionEvent event) {
         start();
-
     }
 
     private void start() {
-
-        if (!running) {
-            Runnable thread = () -> {
-                nextbtn.fire();
+//        if (!running) {
+            Runnable task = () -> {
+                Platform.runLater(() -> nextbtn.fire());
             };
 
-            executor = Executors.newScheduledThreadPool(2);
-            executor.scheduleAtFixedRate(thread, 2, 2, TimeUnit.SECONDS);
+            executor = Executors.newSingleThreadScheduledExecutor();
+            executor.scheduleAtFixedRate(task, 2, 2, TimeUnit.SECONDS);
 
-            running = true;
+//            running = true;
         }
-    }
+//    }
 
     @FXML
     private void stopaction(ActionEvent event) {
         executor.shutdown();
-        running = false;
+//        running = false;
     }
 
     @FXML
     private void nextpic(ActionEvent event) {
-
         if (!images.isEmpty()) {
             currentImageIndex = (currentImageIndex + 1) % images.size();
             displayImage();
-            Platform.runLater(() -> {
-                setName(images.get(currentImageIndex).impl_getUrl());
-            });
+            setName(files.get(currentImageIndex).getName());
 
         }
     }
 
     @FXML
     private void previousPic(ActionEvent event) {
-
         if (!images.isEmpty()) {
             currentImageIndex
                     = (currentImageIndex - 1 + images.size()) % images.size();
             displayImage();
-            Platform.runLater(() -> {
-                setName(images.get(currentImageIndex).impl_getUrl());
-            });
+            setName(files.get(currentImageIndex).getName());
 
         }
     }
@@ -124,7 +116,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleselectfile(ActionEvent event) {
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select image files");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("Images",
@@ -137,13 +128,12 @@ public class FXMLDocumentController implements Initializable {
                 images.add(new Image(f.toURI().toString()));
             });
             displayImage();
-            setName(images.get(currentImageIndex).impl_getUrl());
+            setName(files.get(currentImageIndex).getName());
         }
     }
 
     public void setName(String imagepic) {
         name.setText(imagepic.substring(imagepic.lastIndexOf("/") + 1, imagepic.length()));
-
     }
 
 }
